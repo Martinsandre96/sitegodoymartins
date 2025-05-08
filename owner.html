@@ -3,25 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Owner Area</title>
+  <title>Owner Area - Godoy Martins Solutions</title>
 </head>
 <body>
-  <h1>Enter the secret code to access the owner area</h1>
-  <form onsubmit="return checkCode()">
-    <input type="text" id="codigo" placeholder="Digite o código secreto">
-    <button type="submit">Entrar</button>
-  </form>
+  <header>
+    <h1>Owner Area Access</h1>
+    <p>Please enter the secret code to access the owner area.</p>
+  </header>
+
+  <main>
+    <form id="accessForm">
+      <label for="secretCode">Enter secret code:</label>
+      <input type="password" id="secretCode" required />
+      <button type="submit">Enter</button>
+    </form>
+
+    <p id="errorMessage" style="color: red; display: none;">Incorrect code! Please try again.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Godoy Martins Solutions</p>
+  </footer>
 
   <script>
-    function checkCode() {
-      const codigo = document.getElementById('codigo').value;
-      if (codigo === "meucodigo123") { // Seu código secreto aqui
-        window.location.href = "ownerContent.html"; // Área do proprietário
+    // Secret code (you can change this to any code you prefer)
+    const correctCode = 'meucodigo123'; 
+
+    // Get references to the form, input, and error message
+    const form = document.getElementById('accessForm');
+    const secretCodeInput = document.getElementById('secretCode');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Handle form submission
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form from reloading the page
+
+      // Check if the code entered is correct
+      if (secretCodeInput.value === correctCode) {
+        window.location.href = 'ownerContent.html'; // Redirect to the owner content page
       } else {
-        alert("Código incorreto");
+        errorMessage.style.display = 'block'; // Show error message
       }
-      return false;
-    }
+    });
   </script>
 </body>
 </html>

@@ -1,18 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Owner Area</title>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Owner Area</h1>
-  </header>
-  <main>
-    <p>This area will be restricted to vehicle owners. System under development.</p>
-  </main>
+  <h1>Enter the secret code to access the owner area</h1>
+  <form onsubmit="return checkCode()">
+    <input type="text" id="codigo" placeholder="Digite o código secreto">
+    <button type="submit">Entrar</button>
+  </form>
+
+  <script>
+    function checkCode() {
+      const codigo = document.getElementById('codigo').value;
+      if (codigo === "meucodigo123") { // Seu código secreto aqui
+        window.location.href = "ownerContent.html"; // Área do proprietário
+      } else {
+        alert("Código incorreto");
+      }
+      return false;
+    }
+  </script>
 </body>
 </html>

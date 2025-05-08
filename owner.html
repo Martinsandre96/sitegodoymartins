@@ -3,48 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Owner Area - Godoy Martins Solutions</title>
+  <title>Owner Login - Godoy Martins Solutions</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Owner Area Access</h1>
-    <p>Please enter the secret code to access the owner area.</p>
+    <img src="logo.png" alt="Godoy Martins Solutions Logo" class="logo" />
   </header>
 
   <main>
-    <form id="accessForm">
-      <label for="secretCode">Enter secret code:</label>
-      <input type="password" id="secretCode" required />
-      <button type="submit">Enter</button>
-    </form>
-
-    <p id="errorMessage" style="color: red; display: none;">Incorrect code! Please try again.</p>
+    <section class="login">
+      <h1>Owner Area Login</h1>
+      <form id="loginForm">
+        <label for="code">Enter Access Code:</label>
+        <input type="text" id="code" placeholder="Enter your code" required />
+        <button type="submit" class="btn login-btn">Login</button>
+      </form>
+      <p id="errorMessage" style="color: red; display: none;">Invalid code. Please try again.</p>
+    </section>
   </main>
 
   <footer>
     <p>&copy; 2025 Godoy Martins Solutions</p>
   </footer>
 
-  <script>
-    // Secret code (you can change this to any code you prefer)
-    const correctCode = 'meucodigo123'; 
-
-    // Get references to the form, input, and error message
-    const form = document.getElementById('accessForm');
-    const secretCodeInput = document.getElementById('secretCode');
-    const errorMessage = document.getElementById('errorMessage');
-
-    // Handle form submission
-    form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent form from reloading the page
-
-      // Check if the code entered is correct
-      if (secretCodeInput.value === correctCode) {
-        window.location.href = 'ownerContent.html'; // Redirect to the owner content page
-      } else {
-        errorMessage.style.display = 'block'; // Show error message
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

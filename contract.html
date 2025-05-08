@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<button class="btn-generate-pdf" onclick="generatePDF()">Generate PDF</button>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Agreement - Godoy Martins Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header img {
+            max-width: 120px;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin: 10px 0;
+        }
+        .contract-details {
+            margin-bottom: 30px;
+        }
+        .contract-details th, .contract-details td {
+            padding: 8px;
+            text-align: left;
+            width: 50%;
+        }
+        .contract-details th {
+            background-color: #f2f2f2;
+        }
+        .signature {
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="logo.png" alt="Godoy Martins Solutions Logo">
+        <h1>Rental Agreement</h1>
+        <p>Vehicle Rental Agreement between Godoy Martins Solutions and Customer</p>
+    </div>
+
+    <div class="contract-details">
+        <table style="width: 100%;">
+            <tr>
+                <th>Invoice Number</th>
+                <td>#{{invoice_number}}</td>
+            </tr>
+            <tr>
+                <th>Reservation Date</th>
+                <td>{{reservation_date}}</td>
+            </tr>
+            <tr>
+                <th>Customer Name</th>
+                <td>{{customer_name}}</td>
+            </tr>
+            <tr>
+                <th>Customer Address</th>
+                <td>{{customer_address}}</td>
+            </tr>
+            <tr>
+                <th>Vehicle</th>
+                <td>{{vehicle_name}}</td>
+            </tr>
+            <tr>
+                <th>Pickup Date</th>
+                <td>{{pickup_date}}</td>
+            </tr>
+            <tr>
+                <th>Return Date</th>
+                <td>{{return_date}}</td>
+            </tr>
+            <tr>
+                <th>Total Amount</th>
+                <td>${{total_amount}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="contract-text">
+        <p>By signing below, both parties agree to the terms of this rental agreement, which includes rental period, terms, and payment information outlined above.</p>
+    </div>
+
+    <div class="signature">
+        <p>Customer Signature: ___________________</p>
+        <p>Date: ___________________</p>
+        <p>Godoy Martins Solutions Signature: ___________________</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Godoy Martins Solutions | All rights reserved</p>
+    </div>
+</div>
+<script>
+    function generatePDF() {
+        // Criando um novo objeto jsPDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+// Adicionando o título
+doc.setFont("helvetica", "bold");
+doc.text("Car Rental Agreement", 105, 20, { align: "center" });
+
+// Adicionando os dados da locação
+doc.setFont("helvetica", "normal");
+doc.text(`Customer Name: ${customerName}`, 20, 40);
+doc.text(`Vehicle Model: ${vehicleModel}`, 20, 50);
+doc.text(`Rental Period: ${rentalStartDate} to ${rentalEndDate}`, 20, 60);
+doc.text(`Total Amount: $${rentalAmount}`, 20, 70);
+
+// Termos do contrato (Adicionando as condições)
+doc.text("Terms and Conditions:", 20, 90);
+doc.text("1. The car has insurance coverage for the trip.", 20, 100);
+doc.text("2. Cancellations must be made 24 hours in advance to avoid a charge of 30%.", 20, 110);
+doc.text("3. A fine of $150 will be charged if smoking or excessive dirt is found inside the car.", 20, 120);
+
+// Salvar o PDF
+doc.save("rental_contract.pdf");
+;
+    }
+</script>
+
+</body>
+</html>
+

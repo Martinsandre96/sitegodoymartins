@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Central de Reservas</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    h1 { color: navy; }
+    form { max-width: 600px; margin: auto; display: flex; flex-direction: column; }
+    label { margin-top: 10px; }
+    input, select { padding: 8px; margin-top: 5px; }
+    button { margin-top: 20px; padding: 10px; background-color: navy; color: white; border: none; }
+  </style>
+</head>
+<body>
+  <h1>Central de Reservas</h1>
+  <form onsubmit="salvarReserva(event)">
+    <label for="cliente">Cliente:</label>
+    <select id="cliente" required></select>
+
+    <label for="veiculo">Veículo:</label>
+    <select id="veiculo" required></select>
+
+    <label for="data">Data da Retirada:</label>
+    <input type="date" id="data" required>
+
+    <label for="hora">Hora da Retirada:</label>
+    <input type="time" id="hora" required>
+
+    <label for="local">Local da Retirada:</label>
+    <input type="text" id="local" required>
+
+    <label for="pagamento">Forma de Pagamento:</label>
+    <select id="pagamento" required>
+      <option value="Cartão de Crédito">Cartão de Crédito</option>
+      <option value="Zelle">Zelle</option>
+      <option value="Cash">Cash</option>
+    </select>
+
+    <button type="submit">Realizar Reserva</button>
+  </form>
+
+  <script>
+    function carregarDados() {
+      const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+      const veiculos = JSON.parse(localStorage.getItem("veiculos")) || [];
+
+      const clienteSelect = document.getElementById("cliente");
+      const veiculoSelect = document.getElementById("veiculo");
+
+      clientes.forEach((c, i) => {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = c.nome + " - " + c.drive;
+        clienteSelect.appendChild(option);
+      });
+
+      veiculos.forEach((v, i) => {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = v.marca + " " + v.modelo + " - " + v.placa;
+        veiculoSelect.appendChild(option);
+      });
+    }
+
+    function salvarReserva(event) {
+      event.preventDefault();
+
+      const reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+
+      const novaReserva = {
+        clienteIndex: document.getElementById("cliente").value,
+        veiculoIndex: document.getElementById("veiculo").value,
+        data: document.getElementById("data").value,
+        hora: document.getElementById("hora").value,
+        local: document.getElementById("local").value,
+        pagamento: document.getElementById("pagamento").value,
+        dataRegistro: new Date().toLocaleString()
+      };
+
+      reservas.push(novaReserva);
+      localStorage.setItem("reservas", JSON.stringify(reservas));
+
+      alert("Reserva realizada com sucesso!");
+      document.querySelector("form").reset();
+    }
+
+    window.onload = carregarDados;
+  </script>
+</body>
+</html>

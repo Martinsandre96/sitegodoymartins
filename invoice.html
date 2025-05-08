@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Godoy Martins Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #ccc;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        .header img {
+            max-width: 120px;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin: 10px 0;
+        }
+        .invoice-details {
+            margin-bottom: 20px;
+        }
+        .invoice-details th, .invoice-details td {
+            padding: 8px;
+            text-align: left;
+        }
+        .invoice-details th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="logo.png" alt="Godoy Martins Solutions Logo">
+        <h1>Invoice</h1>
+        <p>Rental Agreement for Vehicle Reservation</p>
+    </div>
+
+    <div class="invoice-details">
+        <table style="width: 100%;">
+            <tr>
+                <th>Invoice Number</th>
+                <td>#{{invoice_number}}</td>
+            </tr>
+            <tr>
+                <th>Reservation Date</th>
+                <td>{{reservation_date}}</td>
+            </tr>
+            <tr>
+                <th>Customer Name</th>
+                <td>{{customer_name}}</td>
+            </tr>
+            <tr>
+                <th>Customer Address</th>
+                <td>{{customer_address}}</td>
+            </tr>
+            <tr>
+                <th>Vehicle</th>
+                <td>{{vehicle_name}}</td>
+            </tr>
+            <tr>
+                <th>Pickup Date</th>
+                <td>{{pickup_date}}</td>
+            </tr>
+            <tr>
+                <th>Return Date</th>
+                <td>{{return_date}}</td>
+            </tr>
+            <tr>
+                <th>Rate per Day</th>
+                <td>${{daily_rate}}</td>
+            </tr>
+            <tr>
+                <th>Total Days</th>
+                <td>{{total_days}}</td>
+            </tr>
+            <tr>
+                <th>Total Amount</th>
+                <td>${{total_amount}}</td>
+            </tr>
+            <tr>
+                <th>Payment Method</th>
+                <td>{{payment_method}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="total">
+        <p>Total Due: ${{total_amount}}</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Godoy Martins Solutions | All rights reserved</p>
+    </div>
+</div>
+
+</body>
+</html>

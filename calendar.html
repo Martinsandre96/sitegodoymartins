@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calendário de Locações</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    h1 { color: navy; }
+    select, input, button { margin: 5px; padding: 5px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    td, th { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    .day-cell { min-width: 100px; }
+  </style>
+</head>
+<body>
+  <h1>Calendário de Locações</h1>
+
+  <label for="vehicle">Selecione o Veículo:</label>
+  <select id="vehicle" onchange="generateCalendar()">
+    <option>Corolla 2023</option>
+    <option>Ford Escape 2016</option>
+    <option>Hyundai Elantra 2022</option>
+    <!-- Você pode adicionar mais veículos aqui -->
+  </select>
+
+  <label for="year">Ano:</label>
+  <select id="year" onchange="generateCalendar()">
+    <option>2025</option>
+    <option>2026</option>
+  </select>
+
+  <div id="calendarContainer"></div>
+
+  <script>
+    function generateCalendar() {
+      const months = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+      const calendarContainer = document.getElementById("calendarContainer");
+      const year = parseInt(document.getElementById("year").value);
+
+      calendarContainer.innerHTML = '';
+
+      for (let month = 0; month < 12; month++) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        let table = `<h2>${months[month]} ${year}</h2><table><tr>`;
+
+        for (let d = 1; d <= daysInMonth; d++) {
+          table += `<th>${d}</th>`;
+        }
+        table += "</tr><tr>";
+
+        for (let d = 1; d <= daysInMonth; d++) {
+          table += `<td class="day-cell"><input type="text" style="width: 60px;" placeholder="$" /></td>`;
+        }
+
+        table += "</tr></table>";
+        calendarContainer.innerHTML += table;
+      }
+    }
+
+    window.onload = generateCalendar;
+  </script>
+</body>
+</html>
